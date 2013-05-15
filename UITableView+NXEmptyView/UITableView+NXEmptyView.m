@@ -69,7 +69,15 @@ void nxEV_swizzle(Class c, SEL orig, SEL new)
     objc_setAssociatedObject(self, &NXEmptyViewAssociatedKey, value, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     [self nxEV_updateEmptyView];
 }
-
+@dynamic nxEV_placeholderText;
+- (void)setNxEV_placeholderText:(NSString *)text{
+    UILabel *noResultsLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.width)];
+    noResultsLabel.textColor = [UIColor colorWithWhite:0.557 alpha:1.000];
+    noResultsLabel.font = [UIFont boldSystemFontOfSize:35];
+    noResultsLabel.textAlignment = NSTextAlignmentCenter;
+    noResultsLabel.text = NSLocalizedString(@"No contacts", nil);
+    self.nxEV_emptyView = noResultsLabel;
+}
 @dynamic nxEV_hideSeparatorLinesWheyShowingEmptyView;
 - (BOOL)nxEV_hideSeparatorLinesWheyShowingEmptyView
 {
